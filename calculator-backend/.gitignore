@@ -1,0 +1,10 @@
+# Ignore common binary files
+*.dll
+*.exe
+*.pdb
+*.bin
+
+# Ignore build folders
+/bin/
+/obj/
+/dist/
