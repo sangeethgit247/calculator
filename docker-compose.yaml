@@ -1,0 +1,25 @@
+services:
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: Devops123
+      POSTGRES_DB: calculator_db
+
+  backend:
+    build: ./calculator-backend
+    ports:
+      - "9090:9090"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/calculator_db
+    depends_on:
+      - db
+
+  frontend:
+    build: ./calculator-frontend
+    ports:
+      - "5173:5173"
+    environment:
+      - VITE_API_URL=http://localhost:9090
+    depends_on:
+      - backend
