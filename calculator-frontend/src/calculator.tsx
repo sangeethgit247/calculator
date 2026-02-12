@@ -16,7 +16,7 @@ const Calculator: React.FC = () => {
     const payload: CalcRequest = { elementOne: inputs.n1, elementTwo: inputs.n2, operationType: op };
 
     try {
-      const response = await axios.post(`${import.meta.env.VITE_API_URL}/math/operation`, payload);
+      const response = await axios.post(`${import.meta.env.VITE_API_URL}/math/operation`, payload,{ withCredentials: false });
       setResult(response.data.result);
     } catch (error) {
       console.error("Math error!", error);
