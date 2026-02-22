@@ -2,7 +2,7 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import calculatorLogo from './assets/cal.png'
-import CalculatorButton from './button'
+import CalculatorButton from './calcbutton'
 import axios from 'axios'
 import Calculator from './calculator'
 import HistoryList from './history'
@@ -25,7 +25,7 @@ function App() {
         <img src={calculatorLogo} className="logo calculator" alt="Calculator logo" />
         </a>
         <h1 className='buttons'>
-          <CalculatorButton label="7" onClick={(value) => console.log(value)} />
+          {/* <CalculatorButton label="7" onClick={(value) => console.log(value)} />
           <CalculatorButton label="8" onClick={(value) => console.log(value)} />
           <CalculatorButton label="9" onClick={(value) => console.log(value)} />
           <CalculatorButton label="x" onClick={(value) => console.log(value)} />
@@ -43,7 +43,7 @@ function App() {
           <CalculatorButton label="0" onClick={(value) => console.log(value)} />  
           <CalculatorButton label="." onClick={(value) => console.log(value)} />  
           <CalculatorButton label="<-" onClick={(value) => console.log(value)} />  
-          {/* <CalculatorButton label="=" onClick={(value) => console.log(value)} /> */}
+          <CalculatorButton label="=" onClick={(value) => console.log(value)} /> */}
             
         </h1>
       </div>
