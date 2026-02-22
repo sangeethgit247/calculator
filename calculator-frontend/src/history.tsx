@@ -2,9 +2,7 @@ import React, { useState } from 'react';
 import axios, { AxiosError } from 'axios';
 
 interface calculationHistory {
-  operationType: string;
-  elementOne: number;
-  elementTwo: number;
+  operationString: string;
   result: number;
 }
 
@@ -56,17 +54,15 @@ const HistoryList: React.FC = () => {
         <div className="bg-white rounded-xl shadow-inner p-4 border border-gray-200">
           <h3 className="font-bold text-gray-700 mb-3 border-b pb-2">Recent Calculations</h3>
           {history.length > 0 ? (
-            <ul className="space-y-2">
+            <ol className="space-y-2">
               {history.map((item, index) => (
                 <li key={index} className="text-gray-600 font-mono">
-                  <span className="text-blue-600">{item.elementOne}</span> 
-                  <span className="mx-1 text-gray-400">{item.operationType}</span> 
-                  <span className="text-blue-600">{item.elementTwo}</span> 
+                  <span className="font-bold text-gray-900">{item.operationString}</span>
                   <span className="mx-2">=</span>
                   <span className="font-bold text-gray-900">{item.result}</span>
                 </li>
               ))}
-            </ul>
+            </ol>
           ) : (
             <p className="text-gray-400 italic">No history available.</p>
           )}

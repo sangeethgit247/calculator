@@ -1,29 +1,3 @@
-// import React, { useState} from 'react';
-// import axios from 'axios';
-// import calcbutton from './calcbutton';
-
-// // TypeScript interface for our request
-// interface CalcRequest {
-//   elementOne: number;
-//   elementTwo: number;
-//   operationType: string;
-// }
-
-// const Calculator: React.FC = () => {
-//   const [inputs, setInputs] = useState({ n1: 0, n2: 0 });
-//   const [result, setResult] = useState<number>(0);
-
-//   const handleCalc = async (op: string) => {
-//     const payload: CalcRequest = { elementOne: inputs.n1, elementTwo: inputs.n2, operationType: op };
-
-//     try {
-//       const response = await axios.post(`${import.meta.env.VITE_API_URL}/math/operation`, payload,{ withCredentials: false });
-//       setResult(response.data.result);
-//     } catch (error) {
-//       console.error("Math error!", error);
-//     }
-//   };
-
 import React, { useState } from 'react';
 import axios from 'axios';
 import CalcButton from './calcbutton';
@@ -55,14 +29,16 @@ const Calculator: React.FC = () => {
   };
 
   // BLOCK: Backend Communication
-  const handleCalculate = async () => {
+  const handleCalculate = async (expression: string) => {
     try {
-      // payload represents the full multi-operation string
-      const payload = { fullExpression: expression };
-      
-      const response = await axios.post(`${import.meta.env.VITE_API_URL}/math/operation`, payload,{ withCredentials: false })
-      
-      const result = response.data.result.toString();
+      const response = await axios.post(`${import.meta.env.VITE_API_URL}/math/operation`, 
+      {},{
+        params: {
+          expression: expression
+        },
+        // withCredentials: false
+      });
+      const result = response.data.toString();
       setDisplay(result);
       setExpression(result); // Allow user to continue operating on the result
       setIsDone(true);
@@ -117,7 +93,7 @@ const Calculator: React.FC = () => {
 
           <CalcButton label="0" value="0" onClick={handleNumber} className="col-span-2" />
           <CalcButton label="." value="." onClick={handleNumber} />
-          <CalcButton label="=" value="=" onClick={handleCalculate} variant="op" />
+          <CalcButton label="=" value={`${expression}`} onClick={handleCalculate} variant="op" />
         </div>
       </div>
     </div>

@@ -6,8 +6,19 @@ services:
       POSTGRES_PASSWORD: Devops123
       POSTGRES_DB: calculator_db
 
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin_ui
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - "5050:80"
+    depends_on:
+      - db
+
   backend:
-    build: ./calculator-backend
+    image: hteegnas/backend-calculator:latest
     ports:
       - "9090:9090"
     environment:
@@ -20,7 +31,7 @@ services:
       - db
 
   frontend:
-    build: ./calculator-frontend
+    image: hteegnas/frontend-calculator:latest
     ports:
       - "5173:5173"
     environment:
