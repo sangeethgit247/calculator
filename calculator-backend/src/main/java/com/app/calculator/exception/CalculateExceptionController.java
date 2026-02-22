@@ -13,6 +13,8 @@ import com.app.calculator.dto.ErrorDto;
 
 import jakarta.validation.ConstraintViolationException;
 
+import javax.script.ScriptException;
+
 @RestControllerAdvice
 public class CalculateExceptionController {
 	
@@ -26,7 +28,20 @@ public class CalculateExceptionController {
 		
 		return ResponseEntity.badRequest().body(dto);
 	}
-	
+
+	@ExceptionHandler(exception= ScriptException.class)
+	public ResponseEntity<ErrorDto> handleScriptException(ScriptException ex) {
+
+		ErrorDto dto = new ErrorDto();
+
+		dto.setErrorMessage(ex.getMessage());
+		dto.setStatusCode(500);
+		return ResponseEntity
+				.badRequest()
+				.body(dto);
+	}
+
+
 	@ExceptionHandler(exception = Exception.class)
 	public ResponseEntity<ErrorDto> handlerForGenericException(Exception ex){
 		
