@@ -1,0 +1,9 @@
+name: sample
+
+on: workflow_dispatch
+
+jobs:
+  sample_message:
+    runs-on: ubuntu-22.04
+    steps:
+      - run: echo "welcome to calculator"
